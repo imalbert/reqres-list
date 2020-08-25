@@ -1,4 +1,4 @@
-import React, { useState, ReactEventHandler } from 'react'
+import React, { useState } from 'react'
 import { User } from '../api/reqres'
 import UserForm from './UserForm'
 import UserItem from './UserItem'
