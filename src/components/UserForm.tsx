@@ -1,5 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, InputHTMLAttributes } from 'react'
 import { User } from '../api/reqres'
+
+type UserFormFieldProps = {
+  fieldName: string,
+  user: User | any,
+  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined,
+  disabled: boolean,
+}
+const UserFormField = ({fieldName, user, onChange, disabled}: UserFormFieldProps) => (
+  <p>
+    <label htmlFor={fieldName}>{fieldName.replace('/_/g', ' ')}</label>
+    <input
+      id={fieldName}
+      value={user[fieldName]}
+      placeholder={fieldName}
+      onChange={onChange}
+      disabled={disabled}
+    />
+  </p>
+)
 
 type UserFormProps = {
   user: User | any,
@@ -21,34 +40,11 @@ const UserForm = ({ user, updateUser, onSubmit }: UserFormProps) => {
 
   return (
     <form onSubmit={submitEvt}>
-      <input
-        value={user?.first_name}
-        placeholder='First name'
-        onChange={updateUserInfo('first_name')}
-        disabled={loading}
-      />
-      <input
-        value={user?.last_name}
-        placeholder='Last name'
-        onChange={updateUserInfo('last_name')}
-        disabled={loading}
-      />
-      <input
-        value={user?.email}
-        placeholder='Email'
-        onChange={updateUserInfo('email')}
-        disabled={loading}
-      />
-      <input
-        value={user?.avatar}
-        placeholder='Avatar'
-        onChange={updateUserInfo('avatar')}
-        disabled={loading}
-      />
-      <button
-        onClick={submitEvt}
-        disabled={loading}
-      >
+      <UserFormField fieldName='first_name' user={user} onChange={updateUserInfo('first_name')} disabled={loading} />
+      <UserFormField fieldName='last_name' user={user} onChange={updateUserInfo('last_name')} disabled={loading} />
+      <UserFormField fieldName='email' user={user} onChange={updateUserInfo('email')} disabled={loading} />
+      <UserFormField fieldName='avatar' user={user} onChange={updateUserInfo('avatar')} disabled={loading} />
+      <button onClick={submitEvt} disabled={loading}>
         Submit
       </button>
     </form>
