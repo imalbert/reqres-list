@@ -16,10 +16,6 @@ class App extends React.Component {
   async componentDidMount() {
     let users = await reqresAPI.list()
     this.setState({ users })
-    let newUser = await reqresAPI.create({ name: 'Albert', job: 'unemployed' })
-    let updatedUser = await reqresAPI.get(newUser.id)
-    await reqresAPI.list(2)
-    await reqresAPI.delete(newUser.id)
   }
 
   render () {
@@ -38,6 +34,7 @@ class App extends React.Component {
               onUpdateUser={this.handleUpdateUser}
               updating={updating}
               onToggleUpdate={this.handleToggleUpdate}
+              onDeleteUser={this.handleDeleteUser}
             />
           )
         }
@@ -59,8 +56,8 @@ class App extends React.Component {
     this.setState({ users: await reqresAPI.list() })
   }
 
-  handleDeleteUser() {
-
+  handleDeleteUser = async (id: string) => {
+    await reqresAPI.delete(id)
   }
 }
 

@@ -8,6 +8,7 @@ type UserListProps = {
   onUpdateUser: Function,
   updating: null | string,
   onToggleUpdate: Function,
+  onDeleteUser: Function,
 }
 const UserList = (props: UserListProps) => {
   const [updatingUser, setUpdatingUser] = useState<User|null>(null)
@@ -18,8 +19,21 @@ const UserList = (props: UserListProps) => {
       {props.users.map((user) => (
         <li>
           {props.updating === user.id
-            ? <UserForm user={updatingUser} updateUser={setUpdatingUser} onSubmit={props.onUpdateUser} />
-            : <UserItem user={user} onToggleUpdate={props.onToggleUpdate} setUpdatingUser={setUpdatingUser} />
+            ? (
+              <UserForm
+                user={updatingUser}
+                updateUser={setUpdatingUser}
+                onSubmit={props.onUpdateUser}
+              />
+            )
+            : (
+              <UserItem
+                user={user}
+                onToggleUpdate={props.onToggleUpdate}
+                setUpdatingUser={setUpdatingUser}
+                onDeleteUser={props.onDeleteUser}
+              />
+            )
           }
         </li>
       ))}

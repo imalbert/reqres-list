@@ -1,8 +1,13 @@
 import React from 'react'
 import { User } from '../api/reqres'
 
-type UserItemProps = { user: User, onToggleUpdate: Function, setUpdatingUser: Function }
-const UserItem = ({ user, onToggleUpdate, setUpdatingUser }: UserItemProps) => {
+type UserItemProps = {
+  user: User,
+  onToggleUpdate: Function,
+  setUpdatingUser: Function,
+  onDeleteUser: Function,
+}
+const UserItem = ({ user, onToggleUpdate, setUpdatingUser, onDeleteUser }: UserItemProps) => {
   const { first_name, last_name, email, avatar, id } = user
   return (
     <dl>
@@ -18,7 +23,7 @@ const UserItem = ({ user, onToggleUpdate, setUpdatingUser }: UserItemProps) => {
         }}>
           update
         </button>
-        <button>Delete</button>
+        <button onClick={() => { onDeleteUser(user.id) }}>Delete</button>
       </dd>
     </dl>
   )
