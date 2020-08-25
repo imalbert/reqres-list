@@ -19,7 +19,6 @@ class App extends React.Component {
   }
 
   render () {
-    console.log(this.state.users)
     const { users, updating } = this.state
     return (
       <div>
@@ -58,6 +57,7 @@ class App extends React.Component {
 
   handleDeleteUser = async (id: string) => {
     await reqresAPI.delete(id)
+    this.setState({ users: await reqresAPI.list() })
   }
 }
 

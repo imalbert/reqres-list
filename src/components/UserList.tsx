@@ -12,7 +12,6 @@ type UserListProps = {
 }
 const UserList = (props: UserListProps) => {
   const [updatingUser, setUpdatingUser] = useState<User|null>(null)
-  console.log(updatingUser, props.updating)
 
   return (
     <ul>
